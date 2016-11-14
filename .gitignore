@@ -1,0 +1,112 @@
+int A = 13;
+int B = 12;
+int C = 11;
+int D = 10;
+int motor = 7;
+int valor_cad;
+int unidades = 6;
+int decenas = 8;
+int cont_decena = 0;
+int cont_unidad = 0;
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(motor, OUTPUT);
+  pinMode (A, OUTPUT);
+  pinMode (B, OUTPUT);
+  pinMode (C, OUTPUT);
+  pinMode (D, OUTPUT);
+  pinMode (unidades, OUTPUT);
+  pinMode (decenas, OUTPUT);
+}
+
+void loop() {
+
+  valor_cad = analogRead(0);
+  analogWrite(motor, valor_cad / 4);
+  delay(100);
+
+  valor_cad = map (valor_cad, 0, 1023, 0, 99);
+  cont_decena = valor_cad / 10;
+  cont_unidad = valor_cad - (cont_decena * 10);
+  digitalWrite(unidades, HIGH);
+  digitalWrite(decenas, LOW);
+  dis(cont_unidad);
+  delay(500);
+
+  digitalWrite(unidades, LOW);
+  digitalWrite(decenas, HIGH);
+  dis(cont_decena);
+  delay(500);
+}
+void dis (int numero) {
+  switch (numero) {
+    case 0:
+      digitalWrite(A, LOW);
+      digitalWrite(B, LOW);
+      digitalWrite(C, LOW);
+      digitalWrite(D, LOW);
+      break;
+    case 1:
+      digitalWrite(A, HIGH);
+      digitalWrite(B, LOW);
+      digitalWrite(C, LOW);
+      digitalWrite(D, LOW);
+      break;
+    case 2:
+      digitalWrite(A, LOW);
+      digitalWrite(B, HIGH);
+      digitalWrite(C, LOW);
+      digitalWrite(D, LOW);
+      break;
+    case 3:
+      digitalWrite(A, HIGH);
+      digitalWrite(B, HIGH);
+      digitalWrite(C, LOW);
+      digitalWrite(D, LOW);
+      break;
+    case 4:
+      digitalWrite(A, LOW);
+      digitalWrite(B, LOW);
+      digitalWrite(C, HIGH);
+      digitalWrite(D, LOW);
+      break;
+
+    case 5:
+
+      digitalWrite(A, HIGH);
+      digitalWrite(B, LOW);
+      digitalWrite(C, HIGH);
+      digitalWrite(D, LOW);
+      break;
+
+
+    case 6:
+      digitalWrite(A, LOW);
+      digitalWrite(B, HIGH);
+      digitalWrite(C, HIGH);
+      digitalWrite(D, LOW);
+      break;
+
+    case 7:
+      digitalWrite(A, HIGH);
+      digitalWrite(B, HIGH);
+      digitalWrite(C, HIGH);
+      digitalWrite(D, LOW);
+      break;
+
+    case 8:
+      digitalWrite(A, LOW);
+      digitalWrite(B, LOW);
+      digitalWrite(C, LOW);
+      digitalWrite(D, HIGH);
+      break;
+
+    case 9:
+      digitalWrite(A, HIGH);
+      digitalWrite(B, LOW);
+      digitalWrite(C, LOW);
+      digitalWrite(D, HIGH);
+      break;
+
+  }
+}
